@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html>  
+  <head>
+    <meta charset="UTF-8">
+    <title>AR.js Camera Position from Marker</title>
+    <script src="https://aframe.io/releases/1.5.0/aframe.min.js"></script>
+    <!-- we import arjs version without NFT but with marker + location based support -->
+    <script src="https://raw.githack.com/AR-js-org/AR.js/master/aframe/build/aframe-ar.js"></script>
+    <script src="https://cdn.webrtc.ecl.ntt.com/skyway-4.4.5.js"></script>
+
+    
+    <style>
+      /* カメラ映像のサイズを指定 */
+      #my-video {
+        width: 640px; /* 幅を指定 */
+        height: 480px; /* 高さを指定 */
+        border: 2px solid black; /* 縁をつけて確認用 */
+        position: absolute; /* 必要に応じて位置調整 */
+        top: 20px;
+        left: 2px;
+        z-index: 10;
+      }
+       /* テキストや入力フィールドを配置 */
+       #my-id {
+        position: absolute;
+        top: 495px; /* my-video の下に配置 */
+        left: 10px;
+        z-index: 10;
+      }
+
+      #their-id {
+        position: absolute;
+        top: 510px; /* my-id の下に配置 */
+        left: 190px;
+        z-index: 10;
+      }
+
+      #make-call {
+        position: absolute;
+        top: 505px; /* their-id の下に配置 */
+        left: 380px;
+        z-index: 10;
+      }
+
+      #end-call {
+        position: absolute;
+        top: 505px; /* make-call と同じ高さ */
+        left: 430px; /* make-call の右側に配置 */
+        z-index: 10;
+      }
+
+      /* 受信ビデオを配置 */
+      #their-video {
+        width: 640px;
+        height: 480px; /* 高さは自動 */
+        border: 2px solid black;
+        position: absolute;
+        top: 20px;
+        left: 700px;
+        z-index: 10;
+      }
+    </style>
+  </head>
+    <body>
+      <p id="my-id"></p>
+      <input id="their-id"></input>
+      <button id="make-call">発信</button>
+      <button id="end-call">切断</button>
+      <video id="my-video" width="1280px" height="720px" autoplay muted playsinline></video>
+      <video id="their-video" width="400px" autoplay muted playsinline></video>    
+      <a-scene embedded arjs="detectionMode: color_and_matrix; threshold: auto;">
+          <!-- 3DCGモデルを読み込む
+          <a-assets>
+            <a-asset-item id="house" src="./medieval_house_01_mid_poly.glb"></a-asset-item>
+          </a-assets> -->
+        <a-marker type="hiro", id="anchor" marker-position>
+          <!-- 3Dモデルを呼び出す -->
+          <!-- <a-entity gltf-model="#house" scale = '0.1 0.1 0.1'></a-entity> -->
+          <!-- <a-sphere radius="0.25" position="0 3 0" color="#f00">
+            <a-animation attribute="position" to="0 1 0" direction="alternate" dur="2000" repeat="indefinite">
+            </a-animation>
+          </a-sphere> -->
+        </a-marker>
+        <!-- <a-entity camera></a-entity> -->
+        </a-scene>
+
+        <script src="./location.js"></script>
+    <!-- ビデオのオンオフ -->
+    <style>
+      video {
+        /* display: none; */
+        width: 500px;  /* 幅を指定 */
+        height: auto;  /* 高さは自動調整 */
+      }
+    </style>
+    <script>
+      window.onload = function() {
+        // 3秒後にAR.jsのビデオを非表示にする
+        setTimeout(function() {
+          const arjsVideo = document.getElementById('arjs-video');
+          if (arjsVideo) {
+            arjsVideo.style.display = 'none';  // AR.js のビデオを非表示にする
+          }
+        }, 1000);  // 1秒後に実行
+      };
+    </script>
+    
+    </body>
+</html>
