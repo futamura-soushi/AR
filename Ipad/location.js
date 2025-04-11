@@ -22,8 +22,6 @@ document.addEventListener('DOMContentLoaded', () => {
   const videoElement = document.getElementById('my-video');
 
   navigator.mediaDevices.getUserMedia({ video: { 
-    width: camerawidth,
-    height: cameraheight,
     facingMode: 'environment' } })
       .then(stream => {
           videoElement.srcObject = stream;
