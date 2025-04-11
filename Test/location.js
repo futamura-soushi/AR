@@ -46,22 +46,22 @@ navigator.mediaDevices.getUserMedia({video: true, audio: false})
 
 
 // カメラ映像取得
-// document.addEventListener('DOMContentLoaded', () => {
-//   const videoElement = document.getElementById('my-video');
+document.addEventListener('DOMContentLoaded', () => {
+  const videoElement = document.getElementById('my-video');
 
-//   navigator.mediaDevices.getUserMedia({ video: { 
-//     width: camerawidth,
-//     height: cameraheight,
-//     facingMode: 'environment' } })
-//       .then(stream => {
-//           videoElement.srcObject = stream;
-//           videoElement.play();
-//           localStream = stream
-//       })
-//       .catch(error => {
-//           console.error('Error accessing rear camera:', error);
-//       });
-// });
+  navigator.mediaDevices.getUserMedia({ video: { 
+    width: camerawidth,
+    height: cameraheight,
+    facingMode: 'environment' } })
+      .then(stream => {
+          videoElement.srcObject = stream;
+          videoElement.play();
+          localStream = stream
+      })
+      .catch(error => {
+          console.error('Error accessing rear camera:', error);
+      });
+});
 
     //Peer作成
     const peer = new Peer({
