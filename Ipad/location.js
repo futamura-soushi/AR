@@ -17,51 +17,23 @@ const cameraheight = 720;
 
 let localStream;
 
-
 // カメラ映像取得
+document.addEventListener('DOMContentLoaded', () => {
+  const videoElement = document.getElementById('my-video');
 
-navigator.mediaDevices.getUserMedia({video: true, audio: false})
-  .then( stream => {
-  // 成功時にvideo要素にカメラ映像をセットし、再生
-  const videoElm = document.getElementById('my-video');
-  videoElm.srcObject = stream;
-  videoElm.play();
-  // 着信時に相手にカメラ映像を返せるように、グローバル変数に保存しておく
-  localStream = stream;
-  // Get the video track of the camera stream
-  const track = localStream.getVideoTracks()[0];
-
-  // Get the current settings of the video track
-  const settings = track.getSettings();
-
-  // Camera resolution
-  let video_width = settings.width;     //webcamの場合640
-  let video_height = settings.height;   //webcamの場合480
-
-}).catch( error => {
-  // 失敗時にはエラーログを出力
-  console.error('mediaDevice.getUserMedia() error:', error);
-  return;
+  navigator.mediaDevices.getUserMedia({ video: { 
+    width: camerawidth,
+    height: cameraheight,
+    facingMode: 'environment' } })
+      .then(stream => {
+          videoElement.srcObject = stream;
+          videoElement.play();
+          localStream = stream
+      })
+      .catch(error => {
+          console.error('Error accessing rear camera:', error);
+      });
 });
-
-
-// カメラ映像取得
-// document.addEventListener('DOMContentLoaded', () => {
-//   const videoElement = document.getElementById('my-video');
-
-//   navigator.mediaDevices.getUserMedia({ video: { 
-//     width: camerawidth,
-//     height: cameraheight,
-//     facingMode: 'environment' } })
-//       .then(stream => {
-//           videoElement.srcObject = stream;
-//           videoElement.play();
-//           localStream = stream
-//       })
-//       .catch(error => {
-//           console.error('Error accessing rear camera:', error);
-//       });
-// });
 
     //Peer作成
     const peer = new Peer({
