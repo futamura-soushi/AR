@@ -113,8 +113,10 @@ AFRAME.registerComponent('marker-position', {
               
               console.log("Unity座標系のマーカ位置:", json.UnityPosition);
               console.log("Unity座標系のマーカ回転:", json.UnityRotation);
+              document.getElementById('position').textContent = json.UnityPosition;
+              document.getElementById('rotation').textContent = json.UnityRotation;
               test = 1;
-              console.log(test);
+              
             }else{
               test = 0;
             }     
