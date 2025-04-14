@@ -28,6 +28,20 @@
         z-index: 10;
       }
 
+      #position {
+        position: absolute;
+        top: 510px; /* my-video の下に配置 */
+        left: 10px;
+        z-index: 10;
+      }
+
+      #rotation {
+        position: absolute;
+        top: 525px; /* my-video の下に配置 */
+        left: 10px;
+        z-index: 10;
+      }
+
       #their-id {
         position: absolute;
         top: 510px; /* my-id の下に配置 */
@@ -66,6 +80,8 @@
       <input id="their-id"></input>
       <button id="make-call">発信</button>
       <button id="end-call">切断</button>
+      <p id="position"></p>
+      <p id="rotation"></p>
       <video id="my-video" width="1280px" height="720px" autoplay muted playsinline></video>
       <video id="their-video" width="400px" autoplay muted playsinline></video>    
       <a-scene embedded arjs="detectionMode: color_and_matrix; threshold: auto;">
